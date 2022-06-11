@@ -20,6 +20,7 @@ from datetime import datetime
 from upload_util import ALLOWED_EXTENSIONS, allowed_file, get_extension
 from flask import current_app
 from flask import Flask, request, jsonify, make_response, send_file
+from email_util import sendEmail
 
 
 auth_ns = Namespace('auth', description='A namespace for Authhentication')
@@ -233,6 +234,7 @@ class ApplyForDeliverer(Resource):
             return 400
 
         user.apply_for_deliverer()
+        sendEmail(current_user,"Apply for deliverer request created", "Your apply for deliverer request is created, it will be processed as soon as possible.")
 
         return 200
 
@@ -268,9 +270,11 @@ class VerifyDeliverer(Resource):
         if(data['verify'] == True):
             pending_user.approve_deliverer_application()
             # send email
+            sendEmail(current_user,"Deliverer pending status update", "Your apply for deliverer is aceepted. Congratulation, now you can take delivery for orders.")
         else:
             pending_user.deny_deliverer_application()
             # send email
+            sendEmail(current_user,"Deliverer pending status update", "Your apply for deliverer is denied.")
 
         return 200
         
