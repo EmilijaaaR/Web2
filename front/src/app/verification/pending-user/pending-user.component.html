@@ -4,8 +4,12 @@
         <p><b>First name: </b> {{user?.firstname}}</p>
         <p><b>Last name: </b> {{user?.lastname}}</p>
     </div>  
-    <div class="container">
+    <div class="container" *ngIf="user?.pendingStatus == 'PendingStatus.PEDNING'">
         <button mat-raised-button color="warn" class="button" (click)="verifyUser(false)">Deny</button>
         <button mat-raised-button color="Accent" class="button" (click)="verifyUser(true)">Accept</button>
+    </div>
+    <div class="user-status-container" *ngIf="user?.pendingStatus != 'PendingStatus.PEDNING'">
+        <h3>Status</h3>
+        <h2>{{status | titlecase}}</h2>
     </div>
 </mat-card>

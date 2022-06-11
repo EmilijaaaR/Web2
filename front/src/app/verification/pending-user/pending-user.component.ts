@@ -14,8 +14,13 @@ import { UserService } from 'src/app/user/user.service';
   styleUrls: ['./pending-user.component.css']
 })
 export class PendingUserComponent implements OnInit {
-  @Input()
   user?: User
+  status: string = "Pending"
+  @Input('user') set ord (user: User){
+    this.status = user.pendingStatus.split('.')[1];
+    this.user = user;
+  }
+
 
   constructor(
     private userService: UserService,

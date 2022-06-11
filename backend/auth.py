@@ -246,7 +246,7 @@ class PendingDeliverers(Resource):
         if(user.role != Role.ADMIN):
             return 401
         
-        pending_users = User.query.filter_by(pendingStatus = PendingStatus.PEDNING).all()
+        pending_users = User.query.filter(User.pendingStatus != PendingStatus.NONE).all()
 
         return pending_users
 
