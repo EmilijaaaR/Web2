@@ -1,0 +1,19 @@
+<div>
+    <form [formGroup]="addMealForm" (ngSubmit)="onSubmit()" class="add-meal-container">
+        <mat-form-field appearance="fill" class="add-meal-field ">
+            <mat-label for="name">Name</mat-label>
+            <input matInput formControlName="name">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="add-meal-field ">
+            <mat-label for="ingredients">Ingredients</mat-label>
+            <input matInput formControlName="ingredients">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="add-meal-field ">
+            <mat-label for="price">Price</mat-label>
+            <input matInput type="number" formControlName="price">
+        </mat-form-field>
+        <div class="center" class="add-meal-field " style="margin-top: 1em;">
+            <button mat-raised-button [disabled]="!addMealForm.valid" style="width: 100%">Save</button>
+        </div>
+    </form>
+</div>

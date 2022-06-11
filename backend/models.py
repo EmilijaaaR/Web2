@@ -1,11 +1,10 @@
 from email.policy import default
 from itertools import product
-from random import random
 from sqlalchemy import ForeignKey, true
 from exts import db
 from enum import Enum
 import datetime
-from random import randrange
+import random
 
 class Role(Enum):
     ADMIN = 1
@@ -110,7 +109,7 @@ class Order(db.Model):
         timenow += datetime.timedelta(
             minutes=random.randint(20,120)
             )
-        self.estimated_time = timenow.microsecond / 1000
+        self.estimated_time = timenow.timestamp() * 1000
         db.session.commit()
         
 class OrderItem(db.Model):

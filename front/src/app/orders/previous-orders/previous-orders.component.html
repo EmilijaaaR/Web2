@@ -1,0 +1,9 @@
+<mat-card class="orders-list-container">
+    <mat-card-title>Previous orders</mat-card-title>
+    <div *ngIf="orders.length == 0">
+        <h2>No orders</h2>
+    </div>
+    <div *ngIf="orders.length != 0">
+        <app-order-list [orders]="orders"></app-order-list>
+    </div>
+</mat-card>

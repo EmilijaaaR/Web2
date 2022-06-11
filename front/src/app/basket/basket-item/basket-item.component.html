@@ -1,0 +1,8 @@
+<mat-card class="basket-item-container">
+    <h2>{{meal?.name}}</h2>
+    <p><b>Ingredients: </b>{{meal?.ingredients}} </p>
+    <h2>{{meal?.price}} x {{item.quantity}} RSD</h2>
+    <button mat-icon-button color="primary" (click)="delete()">
+        <mat-icon>delete</mat-icon>
+    </button>
+</mat-card>

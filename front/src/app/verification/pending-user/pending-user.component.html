@@ -1,0 +1,11 @@
+<mat-card class="container">
+    <div>
+        <p><b>Username: </b> {{user?.username}}</p>
+        <p><b>First name: </b> {{user?.firstname}}</p>
+        <p><b>Last name: </b> {{user?.lastname}}</p>
+    </div>  
+    <div class="container">
+        <button mat-raised-button color="warn" class="button" (click)="verifyUser(false)">Deny</button>
+        <button mat-raised-button color="Accent" class="button" (click)="verifyUser(true)">Accept</button>
+    </div>
+</mat-card>

@@ -1,0 +1,10 @@
+<mat-card class="user-list-container">
+    <div *ngIf="users.length != 0">
+        <mat-list *ngFor="let user of users">
+            <app-pending-user [user]="user"></app-pending-user>
+        </mat-list>
+    </div>
+    <div *ngIf="users.length == 0">
+        <h2>There is no user pending for deliverer.</h2>
+    </div>
+</mat-card>

@@ -1,0 +1,30 @@
+<div class="meals-container">
+    <h3>Basket</h3>
+    <mat-list role="list" *ngFor="let item of basketItems | async">
+        <app-basket-item [item]="item"></app-basket-item>
+    </mat-list>
+    <span></span>
+    <!-- sum everything -->
+    <div *ngIf="!isBasketEmpty"  class="basket-checkout">
+        <h2>Order</h2>
+        <!-- address form -->
+        <form [formGroup]="orderForm" class="order-form">
+            <mat-form-field appearance="fill" style="width: 25%;">
+                <mat-label for="address">Address</mat-label>
+                <input matInput formControlName="address">
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="width: 25%;">
+                <mat-label for="Comment">Comment</mat-label>
+                <textarea matInput formControlName="comment"></textarea>
+            </mat-form-field>
+        </form>
+
+        <h4>Items: {{sum}} RSD</h4>
+        <h4>Delivery: 300 RSD</h4>
+        <h2>Sum: {{sum+300}} RSD</h2>
+        <button color="primary" mat-raised-button [disabled]="!orderForm.valid" (click)="submitOrder()">Checkout</button>
+    </div>
+    <div *ngIf="isBasketEmpty">
+        <h2>Your basket is empty!</h2>
+    </div>
+</div>

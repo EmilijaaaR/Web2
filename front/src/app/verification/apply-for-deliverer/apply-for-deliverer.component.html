@@ -1,0 +1,9 @@
+<div class="user-list-container" style="padding: 2em;">
+    <div *ngIf="user?.pendingStatus == 'PendingStatus.NONE'">
+        <p>By pressing apply button you will apply for becoming deliverer.</p>
+        <button mat-raised-button (click)="onApply()">Apply</button>
+    </div>
+    <div *ngIf="user?.pendingStatus != 'PendingStatus.NONE'">
+        <h2>Pending status: {{pendingStatus | titlecase}}</h2>
+    </div>
+</div>

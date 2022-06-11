@@ -4,7 +4,6 @@ from tkinter.messagebox import NO
 from flask_restx import Api, Resource, Namespace, abort, fields, reqparse
 from models import PendingStatus
 from models import Role, User
-from models import Account
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from flask_jwt_extended import (

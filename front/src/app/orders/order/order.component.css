@@ -1,0 +1,13 @@
+.order-title-bar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-table{
+    width: 100%
+}
+.total-price-container{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2em;
+}

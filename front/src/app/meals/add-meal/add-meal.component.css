@@ -1,0 +1,12 @@
+.add-meal-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: aliceblue;
+    border-radius: 10px;
+}
+
+.add-meal-field {
+    width: 80%;
+}

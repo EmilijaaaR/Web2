@@ -1,0 +1,6 @@
+<mat-card class="meal-container">
+    <h2 class="meal-field">{{meal?.name}}</h2>
+    <p class="meal-field"><b>Ingredients: </b>{{meal?.ingredients}} </p>
+    <h2 class="meal-field">{{meal?.price}} RSD</h2>
+    <button class="meal-field" mat-raised-button color="warn" (click)="addMealToBasker(meal!)">Add to basket</button>
+</mat-card>

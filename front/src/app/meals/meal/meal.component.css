@@ -1,0 +1,9 @@
+.meal-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.meal-field {
+    width: 33%;
+}

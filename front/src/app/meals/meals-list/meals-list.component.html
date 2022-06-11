@@ -1,0 +1,18 @@
+<div class="meals-container">
+    <div class="meals-menu-title">
+        <h3>Menu</h3>
+        <button *ngIf="isAdmin" mat-button (click)="showAddMealComponent(!showAddMeal)">Add meal</button>
+    </div>
+    <div *ngIf="showAddMeal">
+        <app-add-meal></app-add-meal>
+    </div>
+    <div class="meal-header-container">
+        <h2 class="meal-header-field">Name</h2>
+        <h2 class="meal-header-field">Ingredients</h2>
+        <h2 class="meal-header-field">Price</h2>
+        <span class="meal-header-field"></span>
+    </div>
+    <mat-list role="list" *ngFor="let meal of meals">
+        <app-meal [meal]="meal"></app-meal>
+    </mat-list>
+</div>

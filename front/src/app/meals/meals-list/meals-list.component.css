@@ -1,0 +1,18 @@
+.meals-menu-title {
+    display: flex;
+    justify-content: space-between;
+}
+.meal-header-container {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    background-color: rgba(186, 186, 186, 0.408);
+    padding-inline: 20px;
+    border-radius: 5px;
+}
+
+.meal-header-field {
+    padding: 0;
+    width: 33%;
+}

@@ -1,0 +1,65 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~ngx-toastr/toastr.css';
+
+.center {
+    margin: auto;
+    width: 50%;
+  }
+  
+.login-div {
+    margin: auto;
+    width: 50%;
+    padding: 2em;
+    background-color: rgba(255, 255, 255, 0.90);
+    border-radius: 25px;
+    margin-top: 10%;
+}
+
+.profile-div {
+    margin: 0;
+    width: 100%;
+    padding: 2em;
+}
+
+.profile-div-image {
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 0.50);
+}
+
+.profile-container {
+    margin: auto;
+    display: flex;
+    padding: 2em;
+    background-color: rgba(255, 255, 255, 0.90);
+    border-radius: 25px;
+    margin-top: 0%;
+}
+
+.meals-container {
+    margin: auto;
+    height: 100%;
+    padding: 2em;
+    background-color: rgba(255, 255, 255, 0.90);
+    border-radius: 25px;
+    margin-top: 0%;
+}
+
+body {
+    background-image: url('assets/background.jpeg');
+    background-position: center center;
+}
+
+.center-form-field {
+    margin: auto;
+    width: 100%;
+    padding-bottom: 1em;
+}
+
+.user-list-container{
+    background-color: rgba(255, 255, 255, 0.90);
+}
+
+.orders-list-container{
+    background-color: rgba(255, 255, 255, 0.90);
+}
