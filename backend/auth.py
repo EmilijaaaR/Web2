@@ -21,7 +21,7 @@ from upload_util import ALLOWED_EXTENSIONS, allowed_file, get_extension
 from flask import current_app
 from flask import Flask, request, jsonify, make_response, send_file
 from email_util import sendEmail
-
+from facebook import GraphAPI
 
 auth_ns = Namespace('auth', description='A namespace for Authhentication')
 
@@ -200,6 +200,65 @@ class Login(Resource):
             "address":db_user.address,
             "role": get_role(db_user.role)
         }})
+
+social_login_model = auth_ns.model(
+    'social-login',
+    {
+        "token": fields.String(),
+        "id": fields.String()
+    }
+)
+
+CLIENT_ID = ""
+@auth_ns.route('/social-login')
+class SocialLogin(Resource):
+    @auth_ns.expect(social_login_model)
+    def post(self):
+        try:
+            data = request.get_json()
+            token = data['token']
+            user_id = data['id']
+            api = GraphAPI(access_token=token)
+            args = {'fields' : 'id, first_name, last_name,  email,  picture, hometown', }
+            profile = api.get_object('me', **args)
+            
+            user = User.query.filter_by(email = profile['email']).first()
+            # register user if doesn't exists
+            if user is None:
+                new_user = User(
+                    username = profile.get('email'),
+                    email = profile.get('email'),
+                    password = generate_password_hash(token),
+                    firstname=profile.get('first_name'),
+                    lastname=profile.get('last_name'),
+                    birthday=0,
+                    address="",
+                    role=Role.CUSTOMER
+                )
+                new_user.save()
+            
+            db_user = User.query.filter_by(email = profile['email']).first()
+
+            access_token = create_access_token(identity=db_user.email)
+            refresh_token = create_refresh_token(identity=db_user.email)
+
+            return jsonify({"token": access_token, "refresh_token":refresh_token, "userData": {
+                "username":db_user.username,
+                "email":db_user.email,
+                "firstname":db_user.firstname,
+                "lastname":db_user.lastname,
+                "address":db_user.address,
+                "role": get_role(db_user.role)
+            }})
+        except Exception as e:
+            # Invalid token
+            if(e.code == 190):
+                return 400
+            return 401
+        return 200
+
+
+
 
 def get_role(role):
     if role == Role.ADMIN:

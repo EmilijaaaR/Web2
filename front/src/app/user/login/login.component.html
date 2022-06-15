@@ -13,8 +13,11 @@
             </button>
         </mat-form-field>
         <a [routerLink]="['/auth/register']">Don't have account? Register.</a>
-        <div class="center" class="center-form-field" style="margin-top: 1em;">
-            <button mat-raised-button [disabled]="!loginForm.valid" style="width: 100%">Login</button>
+        <div class="center" class="center-form-field" style="margin-top: 1em; justify-content: space-between;">
+            <button mat-raised-button [disabled]="!loginForm.valid">Login</button>
+            <button (click)="loginWithGoogle()" type="button" mat-raised-button color="primary">
+                Facebook
+              </button>
         </div>
     </form>
 </div>

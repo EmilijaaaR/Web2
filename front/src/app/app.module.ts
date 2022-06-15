@@ -45,6 +45,7 @@ import { AllOrdersComponent } from './orders/all-orders/all-orders.component';
 import { ApplyForDelivererComponent } from './verification/apply-for-deliverer/apply-for-deliverer.component';
 import { PendingOrdersComponent } from './orders/pending-orders/pending-orders.component';
 import { CurrentOrdersComponent } from './orders/current-orders/current-orders.component';
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 
 
 export function tokenGetter() {
@@ -106,7 +107,8 @@ export var refreshSubject = new BehaviorSubject(false);
     MatIconModule,
     LayoutModule,
     FormsModule,
-    MatListModule
+    MatListModule,
+    SocialLoginModule
   ],
   providers: [
     CookieService,
@@ -115,6 +117,21 @@ export var refreshSubject = new BehaviorSubject(false);
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
+      },
+      {
+        provide: 'SocialAuthServiceConfig',
+        useValue: {
+          autoLogin: false,
+          providers: [
+            {
+              id: FacebookLoginProvider.PROVIDER_ID,
+              provider: new FacebookLoginProvider('1258651144966865'),
+            },
+          ],
+          onError: (err) => {
+            console.error(err);
+          }
+        } as SocialAuthServiceConfig,
       }
   ],
   bootstrap: [AppComponent]

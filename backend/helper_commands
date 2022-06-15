@@ -2,6 +2,7 @@
 pipenv/Scripts/activate                --> to activate the virtual environment for pythoon aka. venv
 pip freeze > requirements.txt          --> to freeze the requirements into requirements.txt file, after that you just execute pip install requirements.txt and all the dependencies are isntalled
 pip install -r requirements.txt        --> to install all requirements from requirements.txt file
+pip install --upgrade flask-sqlalchemy
 
 
 

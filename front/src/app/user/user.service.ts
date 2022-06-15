@@ -7,6 +7,7 @@ import { Token } from './models/token.model';
 import { RegisterComponent } from './register/register.component';
 import { User } from './models/user.model';
 import { Verify } from '../shared/models/verify.model';
+import { SocialLogin } from './models/social-login.model';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +42,9 @@ export class UserService {
 
   applyForDeliverer(): Observable<Object>{
     return this.http.post<Object>(environment.serverUrl + '/auth/apply', '');
+  }
+
+  socialLogin(socialLogin: SocialLogin): Observable<Token> {
+    return this.http.post<Token>(environment.serverUrl + '/auth/social-login', socialLogin);
   }
 }

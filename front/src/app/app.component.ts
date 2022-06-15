@@ -10,7 +10,9 @@ export class AppComponent {
   title = 'front';
 
   isUserLoggedIn(): boolean{
-    return tokenGetter() != null;
+    if(tokenGetter() == 'undefined')
+      localStorage.removeItem('token');
+    return tokenGetter() != null && tokenGetter() != 'undefined';
   }
 
 }
