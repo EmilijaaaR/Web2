@@ -76,7 +76,8 @@ export class BasketComponent implements OnInit {
           this.router.navigateByUrl('/current-orders');
         },
         error => {
-          this.toastr.error("Unable to submit order.")
+          console.log(error);
+          this.toastr.error("You probably already have a order.","Unable to submit order.");
         }
         );
       }

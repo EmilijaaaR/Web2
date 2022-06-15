@@ -55,6 +55,8 @@ create_order_model = order_ns.model(
     }
 )
 
+add_order_semaphore = threading.Semaphore()
+
 @order_ns.route('')
 class OrdersResource(Resource):
 
@@ -98,6 +100,13 @@ class OrdersResource(Resource):
 
         data = request.get_json()
 
+        add_order_semaphore.acquire(timeout=2)
+
+        orders = Order.query.filter_by(customer=user.id).all()
+        for order in orders:
+            if(order.estimated_time > (datetime.datetime.now().timestamp() * 1000)):
+                add_order_semaphore.release()
+                return "You already have order that you are waiting!",400
 
         # check if products exists
         # now add all items
@@ -129,9 +138,9 @@ class OrdersResource(Resource):
             )
             new_order_item.save()
         
+        # release semaphore to enable another request to go
+        add_order_semaphore.release()
 
-        
-        
         return new_order, 200
 
 @order_ns.route('/pending-orders')

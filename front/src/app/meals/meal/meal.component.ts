@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { roleGetter } from 'src/app/app.module';
 import { BasketService } from 'src/app/basket/service/basket.service';
 import { Meal } from '../models/meal.model';
 
@@ -12,6 +13,7 @@ export class MealComponent implements OnInit {
 
   @Input() 
   meal?: Meal
+  role = roleGetter();
 
   constructor(private basketService: BasketService, private toastr: ToastrService) { }
 
