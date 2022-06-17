@@ -1,13 +1,25 @@
-<div>
-    <form [formGroup]="addMealForm" (ngSubmit)="onSubmit()" class="add-meal-container">
+<div class="add-meal-card">
+    <form [formGroup]="addMealForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="fill" class="add-meal-field ">
             <mat-label for="name">Name</mat-label>
             <input matInput formControlName="name">
         </mat-form-field>
-        <mat-form-field appearance="fill" class="add-meal-field ">
+        <!--mat-form-field appearance="fill" class="add-meal-field ">
             <mat-label for="ingredients">Ingredients</mat-label>
             <input matInput formControlName="ingredients">
-        </mat-form-field>
+        </mat-form-field-->
+        <h3>Ingredients:</h3>
+        <div *ngFor="let ingredient of ingredients; let i = index" class="add-ingredient">
+            <h2>{{ingredient}}</h2>
+            <mat-icon (click)="deleteIngredient(i)">delete</mat-icon>
+        </div>
+        <div class="add-ingredient">
+            <mat-form-field appearance="fill" class="add-meal-field">
+                <mat-label for="ingredient">Ingredient</mat-label>
+                <input matInput type="text" formControlName="ingredient" [(ngModel)]="currentIngredient">
+            </mat-form-field>
+            <button mat-raised-button type="button" (click)="addIngredient()">Add</button>
+        </div>
         <mat-form-field appearance="fill" class="add-meal-field ">
             <mat-label for="price">Price</mat-label>
             <input matInput type="number" formControlName="price">

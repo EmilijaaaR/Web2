@@ -14,17 +14,36 @@ import { MealService } from '../service/meal.service';
 export class AddMealComponent implements OnInit {
   addMealForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
-    ingredients: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
+    ingredient: new FormControl('', [Validators.minLength(1), Validators.maxLength(50)]),
+    ingredients: new FormControl('', [ Validators.minLength(1), Validators.maxLength(500)]),
     price: new FormControl('0.0', [Validators.required, Validators.minLength(1), Validators.maxLength(30)])
   });
 
+  ingredients: string[] = [];
+  currentIngredient: string = "";
+
   constructor(private service: MealService, private router: Router, private toastr: ToastrService, private eventService: EventService) { }
+
+  addIngredient(){
+    this.ingredients.push(this.currentIngredient);
+    //this.addMealForm.value['ingredients'] = "  asdasd";
+    //this.addMealForm.value['ingredients'] = "";
+    this.currentIngredient = ""
+  }
+  deleteIngredient(index: number){
+    this.ingredients.splice(index, 1);
+  }
 
   ngOnInit(): void {
   }
   onSubmit() {
     if(this.addMealForm.valid){
       // send login request
+      this.addMealForm.value['ingredients'] = "";
+      this.ingredients.forEach(i => {
+        this.addMealForm.value['ingredients'] += i + "\n";
+      });
+      //return;
       this.service.addMeal(this.addMealForm.value).subscribe(
         (data) => {
           console.log(data)

@@ -1,7 +1,7 @@
 <p>
     <mat-toolbar>
      <button [routerLink]="'/home'" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <!--<mat-icon>fastfood</mat-icon>-->
+      <mat-icon>dashboard</mat-icon>
     </button>
     <span>My restoraunt</span>
     <button mat-button [routerLink]="'/meals'"><mat-icon>fastfood</mat-icon> Meals</button>
@@ -13,13 +13,14 @@
       <button mat-button [routerLink]="'/apply'">Apply for deliverer</button>
       <button mat-button [routerLink]="'/current-orders'">Current orders</button>
       <button mat-button [routerLink]="'/previous-orders'">Previous orders</button>
-      <button mat-button [routerLink]="'/basket'"><mat-icon>card</mat-icon>Basket</button>
+      <button mat-button [routerLink]="'/basket'"><mat-icon>shopping_basket</mat-icon>Basket</button>
     </div>
     <div *ngIf="role == 'ADMIN'">
       <button mat-button [routerLink]="'/all-orders'">All orders</button>
     </div>
     <div *ngIf="role == 'DELIVERER'">
       <button mat-button [routerLink]="'/current-orders'">Current orders</button>
+      <button mat-button [routerLink]="'/previous-orders'">Previous orders</button>
       <button mat-button [routerLink]="'/pending-orders'">Pending orders</button>
     </div>
     <button mat-icon-button class="example-icon" [routerLink]="'/user'" aria-label="Example icon-button with share icon">

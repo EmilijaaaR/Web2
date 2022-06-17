@@ -16,7 +16,7 @@ export class PreviousOrdersComponent implements OnInit {
       data => {
         for(let order of data){
           if(order.estimated_time != null){
-            if(Date.now() > (order.estimated_time * 1000)){
+            if(Date.now() > (order.estimated_time)){
               this.orders.push(order);
             }
           }

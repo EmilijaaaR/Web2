@@ -14,10 +14,15 @@ export class MealComponent implements OnInit {
   @Input() 
   meal?: Meal
   role = roleGetter();
+  ingredients: String[] = [];
 
-  constructor(private basketService: BasketService, private toastr: ToastrService) { }
+  constructor(private basketService: BasketService, private toastr: ToastrService) { 
+  }
 
   ngOnInit(): void {
+    this.meal?.ingredients.split('\n').forEach( i => {
+      this.ingredients.push(i);
+    })
   }
 
   addMealToBasker(meal: Meal){

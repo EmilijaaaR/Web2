@@ -3,8 +3,18 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+}
+
+.add-meal-card {
     background-color: aliceblue;
     border-radius: 10px;
+    margin: 2em;
+    padding: 2em;
+}
+
+.add-ingredient {
+    display: flex;
+    align-items: center;
 }
 
 .add-meal-field {
