@@ -50,7 +50,8 @@ export class RegisterComponent implements OnInit {
       register.birthday = this.registerForm.value.birthday.getTime();
       this.service.register(this.registerForm.value).subscribe(
         data => {
-          this.router.navigateByUrl("/user/login");
+          this.toastr.success("You are successfully registed.");
+          this.router.navigateByUrl("/auth/login");
         },
         error => {
             this.toastr.error(error, 'Registration failed.');
