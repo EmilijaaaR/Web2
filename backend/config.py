@@ -1,7 +1,7 @@
 from decouple import config
 import os
 from datetime import timedelta
-
+import app
 
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 #UPLOAD_PATH = os.path.join(app.instance_path, 'htmlfi')

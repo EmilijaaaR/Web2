@@ -131,12 +131,12 @@ class ProfileImageResource(Resource):
     #@jwt_required()
     @auth_ns.expect(image_get_parser)
     def get(self):
-        id = int(request.args['id'])
+        username = request.args['username']
         if id is None:
             return 400
 
         """ Download user profile image by user id"""
-        user = User.query.filter_by(id=id).first()
+        user = User.query.filter_by(username=username).first()
         if user is None:
             return 400
         filename = user.username
@@ -145,7 +145,8 @@ class ProfileImageResource(Resource):
                 return send_file(os.path.join(current_app.config['UPLOAD_FOLDER'], secure_filename(filename + '.' + ext)), mimetype='image/gif')
             except Exception as err:
                 print(err)
-        return 404
+        return "record not found", 404
+
     @jwt_required()
     @auth_ns.expect(image_post_parser)
     def post(self):

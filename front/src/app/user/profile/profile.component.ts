@@ -56,6 +56,32 @@ export class ProfileComponent implements OnInit {
     this.loadUser();
   }
 
+  file?: any
+
+  handleFileInput(target?: any){
+    console.log("dasdasd");
+    this.file = target.files[0];
+    var reader = new FileReader();
+    reader.onload = (event: any) => {
+        this.profileImageSrc = event.target.result;
+    }
+    reader.readAsDataURL(this.file);
+  }
+
+  saveProfileImage(){
+    let formData:FormData = new FormData();
+    if(this.file != null){
+      formData.append('file', this.file, this.file.name);
+      this.service.uploadProfileImage(formData).subscribe(data => {
+        this.toastr.success("Image succesfully changed"); 
+      },
+      error => {
+        this.toastr.error("Unable to upload image");
+      }
+      )
+    }
+  }
+
   loadUser(){
     this.service.getUser().subscribe(
       (data:User) => {
@@ -68,6 +94,19 @@ export class ProfileComponent implements OnInit {
         this.updateForm.patchValue({
           'birthday': this.birthday
         })
+        this.service.getUserProfileImage(data.username).subscribe(
+          file => {
+            this.file = file;
+            var reader = new FileReader();
+            reader.onload = (event: any) => {
+                this.profileImageSrc = event.target.result;
+            }
+            reader.readAsDataURL(this.file);
+          },
+          error => {
+            
+          }
+        )
       },
       error => {
 

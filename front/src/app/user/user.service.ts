@@ -47,4 +47,12 @@ export class UserService {
   socialLogin(socialLogin: SocialLogin): Observable<Token> {
     return this.http.post<Token>(environment.serverUrl + '/auth/social-login', socialLogin);
   }
+
+  uploadProfileImage(data: FormData): Observable<Object> {
+    return this.http.post<Object>(environment.serverUrl + "/auth/user/image", data);
+  }
+
+  getUserProfileImage(username: string): Observable<Blob> {
+    return this.http.get(environment.serverUrl + "/auth/user/image?username=" + username, { responseType: 'blob' });
+  }
 }
