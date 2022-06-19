@@ -203,6 +203,13 @@ class OrderDeliverResource(Resource):
 
         order_to_deliver=Order.query.get_or_404(id)
         sem.acquire()
+
+        orders = Order.query.filter_by(deliverer=user.id).all()
+        for order in orders:
+            if(order.estimated_time > (datetime.datetime.now().timestamp() * 1000)):
+                sem.release()
+                return "You already have order that you are delivering!",400
+
         try:
             order_to_deliver.set_deliverer(user.id)
             sem.release()

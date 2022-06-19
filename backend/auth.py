@@ -330,11 +330,17 @@ class VerifyDeliverer(Resource):
         if(data['verify'] == True):
             pending_user.approve_deliverer_application()
             # send email
-            sendEmail(current_user,"Deliverer pending status update", "Your apply for deliverer is aceepted. Congratulation, now you can take delivery for orders.")
+            try:
+                sendEmail(current_user,"Deliverer pending status update", "Your apply for deliverer is aceepted. Congratulation, now you can take delivery for orders.")
+            except Exception:
+                return 200
         else:
             pending_user.deny_deliverer_application()
             # send email
-            sendEmail(current_user,"Deliverer pending status update", "Your apply for deliverer is denied.")
+            try:
+                sendEmail(current_user,"Deliverer pending status update", "Your apply for deliverer is denied.")
+            except Exception:
+                return 200
 
         return 200
         
